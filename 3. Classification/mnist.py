@@ -1,8 +1,9 @@
 import matplotlib.pyplot as plt
 from sklearn.datasets import fetch_openml
 from sklearn.linear_model import SGDClassifier
-from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import cross_val_score, cross_val_predict
 from sklearn.dummy import DummyClassifier
+
 # Descargar MNIST
 mnist = fetch_openml('mnist_784', version=1, as_frame=False)
 
@@ -44,3 +45,6 @@ print(any(dummy_clf.predict(x_train))) # Falso por que no detecta "5"
 
 scoredummy = cross_val_score(dummy_clf, x_train, y_train_5, cv=3,scoring="accuracy")
 print(scoredummy)
+
+# Matriz de confusion 
+y_train_pred = cross_val_predict(sgd_clf, x_train, y_train_5,cv=3)
