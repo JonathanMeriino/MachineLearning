@@ -3,7 +3,7 @@ from sklearn.datasets import fetch_openml
 from sklearn.linear_model import SGDClassifier
 from sklearn.model_selection import cross_val_score, cross_val_predict
 from sklearn.dummy import DummyClassifier
-
+from sklearn.metrics import confusion_matrix
 # Descargar MNIST
 mnist = fetch_openml('mnist_784', version=1, as_frame=False)
 
@@ -48,3 +48,7 @@ print(scoredummy)
 
 # Matriz de confusion 
 y_train_pred = cross_val_predict(sgd_clf, x_train, y_train_5,cv=3)
+cm = confusion_matrix(y_train_5, y_train_pred,)
+
+y_train_perfect_predictions = y_train_5
+cm_perfect=confusion_matrix(y_train_5, y_train_perfect_predictions)
